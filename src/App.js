@@ -1,31 +1,66 @@
 ///////////////////////////////////////
-/*NUMBER SEVEN*/
+/*NUMBER EIGHT*/
 ///////////////////////////////////////
 
-import React, {Component} from 'react';
-import './App.css'
+// import React, { Component } from 'react';
+// import './App.css'
+// import axios from 'axios';
 
-import AddTask from './Components/AddTask';
-import List from './Components/List';
+// class App extends Component {
+//   state = { 
+//     characters : {}
+//    }
 
-class App extends Component{
+//    componentDidMount(){
+//      axios.get("https://swapi.co/api/people/1")
+//      .then( res => {
+//        const data = res.data
+//        this.setState({characters: data})
+//      })
+//    }
+
+//   render() { 
+//     console.log(this.state)
+//     return ( 
+//       <div className="App">
+//         <h1>The party is here</h1>
+//       </div>
+//      );
+//   }
+// }
+ 
+// export default App;
+
+import React, { Component } from "react";
+
+import "./App.css";
+
+import axios from "axios";
+
+class App extends Component {
   state = {
-    list: ['Eric', 'Abby']
+    lukeSkywalker: ""
+  };
+  
+
+  componentDidMount() {
+    axios.get('https://swapi.co/api/people/1/').then(response => {
+      this.setState({
+        lukeSkywalker: response.data
+      });
+    });
   }
 
-  addTask = (item) => {
-    this.setState({list: [...this.state.list, item]})
-  }
-
-  render(){
-    return(
-      <div class='App'>
-        <h1>Here we go</h1>
-        <h2>More for the todo List</h2>
-        <AddTask add={this.addTask}/>
-        <List list={this.state.list}/>
+  render() {
+    console.log(this.state)
+    return (
+      <div className="App">
+        <h1>Name: {this.state.lukeSkywalker.name}</h1>
+        <h1>Birth Year: {this.state.lukeSkywalker.birth_year}</h1>
+        <h1>Height: {this.state.lukeSkywalker.height}</h1>
+        <h1>Eye Color: {this.state.lukeSkywalker.eye_color}</h1>
       </div>
-    )
+    );
   }
 }
 
